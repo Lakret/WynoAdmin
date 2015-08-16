@@ -23,19 +23,41 @@ header {
 	background-color: @app-red;
 	text-align: center;
 
-	img {
-		display: block;
+	#navigation {
+		z-index: 101;
 		position: absolute;
 		left: 15px;
 		top: 15px;
-		border: solid 1px white;
-		border-radius: 10px;
-		cursor: pointer;
-		padding: 10px;
-		width: 20px;
-		cursor: pointer;
-		&:hover {
-			background-color: @app-light-red;
+		button {
+			z-index: 101;
+			cursor: pointer;
+			display: block;
+			float: left;
+			border: solid 1px white;
+			margin-right: 5px;
+			border-radius: 10px;
+			background-color: @app-red;
+			width: 40px;
+			height: 40px;
+			&:focus {
+				outline: none;
+			}
+		}
+		#menu {
+			background: url(/images/menu-icon.svg) no-repeat;
+			background-size: 25px;
+			background-position: center; 
+			&:hover {
+				background-color: @app-light-red;
+			}
+		}
+		#home {
+			background: url(/images/home-icon.svg) no-repeat;
+			background-size: 25px;
+			background-position: center; 
+			&:hover {
+				background-color: @app-light-red;
+			}
 		}
 	}
 	h1 {
