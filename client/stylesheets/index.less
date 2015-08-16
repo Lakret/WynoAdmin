@@ -1,0 +1,67 @@
+@import "./variables.import.less";
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Helvetica, 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-size: 11px;
+}
+
+.clear-inline {
+	display: block;
+	clear: both;
+}
+
+header {
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 70px;
+	background-color: @app-red;
+	text-align: center;
+
+	img {
+		display: block;
+		position: absolute;
+		left: 15px;
+		top: 15px;
+		border: solid 1px white;
+		border-radius: 10px;
+		cursor: pointer;
+		padding: 10px;
+		width: 20px;
+		cursor: pointer;
+		&:hover {
+			background-color: @app-light-red;
+		}
+	}
+	h1 {
+		position: relative;
+		top: 24px;
+		margin: 0;
+		color: white;
+		font-weight: 300;
+	}
+	#user {
+		position: absolute;
+		right: 20px;
+		top: 28px;
+		margin: 0;
+		font-weight: 300;
+		font-size: 1.3em;
+		color: white;
+		cursor: pointer;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+#header-hack {
+	position: relative;
+	width: 100%;
+	height: 70px;
+}
