@@ -1,6 +1,6 @@
 @import "./variables.import.less";
 
-#tasting_menu {
+#wines-view {
 	#content {
 		z-index: 90;
 		position: absolute;
@@ -41,6 +41,7 @@
 			width: 960px;
 
 			.a-wine {
+				position: relative;
 				float: left;
 				width: 258px;
 				height: 210px;
@@ -80,8 +81,10 @@
 					color: @dark-grey-text;
 				}
 				.edit-and-delete {
+					position: absolute;
+					bottom: 0;
 					display: none;
-					margin: 20px 40px;
+					margin: 20px 45px;
 					button {
 						cursor: pointer;
 						font-size: 1.5em;

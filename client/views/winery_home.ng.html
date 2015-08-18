@@ -2,14 +2,13 @@
 	<header id="header-hack"></header>
 	<header>
 		<div id="navigation">
-			<button id="menu"></button>
 			<button id="home" ng-click="goTo( 'winery_home' )"></button>
 		</div>
 		<h1>Truett Hurst</h1>
 		<h2 id="user">Hi, Ginny</h2>
 	</header>
 	<div id="content">
-		<div class='menu-option'>
+		<div class='menu-option' ng-click="goTo( 'winery_settings' )">
 			<img src="/images/winery-settings-icon.svg">
 			<h2>winery settings</h2>
 		</div>
@@ -28,7 +27,7 @@
 			<img src="/images/wine_club_icon.svg">
 			<h2>wine clubs</h2>
 		</div>
-		<div class='menu-option'>
+		<div class='menu-option' ng-click="goTo( 'wine_list' )">
 			<img src="/images/browse_our_wines_icon.svg">
 			<h2>entire wine list</h2>
 		</div>

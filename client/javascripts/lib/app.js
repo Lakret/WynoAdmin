@@ -2,7 +2,11 @@ if (Meteor.isClient) {
   // Instantiate angular app
   angular.module( 'WynoAdmin', ['angular-meteor', 'ui.router'] );
 
-  angular.module( 'WynoAdmin' ).config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+  angular.module( 'WynoAdmin' ).config( [ 
+  '$stateProvider', 
+  '$urlRouterProvider', 
+  '$locationProvider', 
+  function($stateProvider, $urlRouterProvider, $locationProvider) {
     var app_root = 'client/views/';
     $locationProvider.html5Mode(true);
 
@@ -22,7 +26,17 @@ if (Meteor.isClient) {
           templateUrl: app_root + 'tasting_menu.ng.html',
           controller: 'TastingMenuController',
       })
+      .state('wine_list', {
+          url: '/winery/:winery_id/wine_list',
+          templateUrl: app_root + 'wine_list.ng.html',
+          controller: 'WineListController',
+      })
+      .state('winery_settings', {
+          url: '/winery/:winery_id/winery_settings',
+          templateUrl: app_root + 'winery_settings.ng.html',
+          controller: 'WineListController',
+      })
 
       $urlRouterProvider.otherwise('/');
-  });
+  } ] );
 }
