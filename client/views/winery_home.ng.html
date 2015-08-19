@@ -2,7 +2,7 @@
 	<header id="header-hack"></header>
 	<header>
 		<div id="navigation">
-			<button id="home" ng-click="goTo( 'winery_home' )"></button>
+			<button id="home" ng-click="goHome()"></button>
 		</div>
 		<h1>Truett Hurst</h1>
 		<h2 id="user">Hi, Ginny</h2>
@@ -18,7 +18,7 @@
 			<h2>tasting menu</h2>
 		</div>
 		<div class="horizontal-spacer"></div>
-		<div class='menu-option'>
+		<div class='menu-option' ng-click="goTo( 'specials' )">
 			<img src="/images/specials_icon.svg">
 			<h2>specials</h2>
 		</div>

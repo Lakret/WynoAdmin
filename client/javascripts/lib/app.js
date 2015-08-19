@@ -36,7 +36,19 @@ if (Meteor.isClient) {
           templateUrl: app_root + 'winery_settings.ng.html',
           controller: 'WineListController',
       })
+      .state('specials', {
+          url: '/winery/:winery_id/specials',
+          templateUrl: app_root + 'specials.ng.html',
+          controller: 'SpecialsController',
+      })
 
       $urlRouterProvider.otherwise('/');
   } ] );
+
+  // Keep history throughout browsing the app 
+  angular.module( 'WynoAdmin' ).run( ['$rootScope', '$location', function( $rootScope, $location ) {
+    $rootScope.goHome = function() {
+      $location.path( '/winery/0' );
+    }
+  }])
 }
