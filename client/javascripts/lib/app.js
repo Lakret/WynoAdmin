@@ -1,4 +1,10 @@
 if (Meteor.isClient) {
+  // Bring references to Mongo collections to the front end
+  Wineries = new Mongo.Collection("wineries");
+  Wines = new Mongo.Collection("wines");
+  WineClubs = new Mongo.Collection("wine_clubs");
+  Specials = new Mongo.Collection("specials");
+
   // Instantiate angular app
   angular.module( 'WynoAdmin', ['angular-meteor', 'ui.router'] );
 
@@ -34,7 +40,7 @@ if (Meteor.isClient) {
       .state('winery_settings', {
           url: '/winery/:winery_id/winery_settings',
           templateUrl: app_root + 'winery_settings.ng.html',
-          controller: 'WineListController',
+          controller: 'WinerySettingsController',
       })
       .state('specials', {
           url: '/winery/:winery_id/specials',
@@ -46,9 +52,9 @@ if (Meteor.isClient) {
   } ] );
 
   // Keep history throughout browsing the app 
-  angular.module( 'WynoAdmin' ).run( ['$rootScope', '$location', function( $rootScope, $location ) {
+  angular.module( 'WynoAdmin' ).run( ['$rootScope', '$location', '$stateParams', function( $rootScope, $location, $stateParams ) {
     $rootScope.goHome = function() {
-      $location.path( '/winery/0' );
+      $location.path( '/winery/' + $stateParams.winery_id );
     }
   }])
 }

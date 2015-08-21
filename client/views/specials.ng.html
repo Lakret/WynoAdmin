@@ -12,62 +12,12 @@
 			<button id="add-wine"><img src="/images/plus-icon.svg"></button>
 		</div>
 		<div id="specials-list">
-			<div class="a-special">
-				<h1 class="vertically-centered">50% off all reds</h1>
-				<div class="clear-inline"></div>
-				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
-				</div>
-			</div>
-			<div class="a-special">
-				<h1 >50% off</h1>
-				<div class="wine">
-					<h3 class="name">2014 Salmon Run Rose</h3>
-					<h3 class="location-and-cases">Dry Creek Valley | 1300 cases produced</h3>
-					<h3 class="description">peach. strawberry. key lime. herbal spice. Pair with fresh fruit and cheeses, smoked fish or spicy asian fare.</h3>
-				</div>
-				<div class="clear-inline"></div>
-				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
-				</div>
-			</div>
-			<div class="a-special">
-				<h1 >50% off</h1>
-				<div class="wine">
-					<h3 class="name">2014 Salmon Run Rose</h3>
-					<h3 class="location-and-cases">Dry Creek Valley | 1300 cases produced</h3>
-					<h3 class="description">peach. strawberry. key lime. herbal spice. Pair with fresh fruit and cheeses, smoked fish or spicy asian fare.</h3>
-				</div>
-				<div class="clear-inline"></div>
-				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
-				</div>
-			</div>
-			<div class="a-special">
-				<h1 class="vertically-centered">50% off all reds</h1>
-				<div class="clear-inline"></div>
-				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
-				</div>
-			</div>
-			<div class="a-special">
-				<h1 class="vertically-centered">50% off all reds</h1>
-				<div class="clear-inline"></div>
-				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
-				</div>
-			</div>
-			<div class="a-special">
-				<h1 >50% off</h1>
-				<div class="wine">
-					<h3 class="name">2014 Salmon Run Rose</h3>
-					<h3 class="location-and-cases">Dry Creek Valley | 1300 cases produced</h3>
-					<h3 class="description">peach. strawberry. key lime. herbal spice. Pair with fresh fruit and cheeses, smoked fish or spicy asian fare.</h3>
+			<div class="a-special" ng-repeat="special in specials" ng-init="wine = wine_factory.getWineById( special.wine_id )">
+				<h1 >{{ special.title }}</h1>
+				<div ng-if="special.wine_id" class="wine">
+					<h3 class="name">{{ wine.name }}</h3>
+					<h3 class="location-and-cases">{{ wine.location }} | {{ wine.cases_produced }}</h3>
+					<h3 class="description">{{ wine.description }}</h3>
 				</div>
 				<div class="clear-inline"></div>
 				<div class="edit-and-delete">
@@ -77,5 +27,4 @@
 			</div>
 		</div>
 	</div>
-
 </main>

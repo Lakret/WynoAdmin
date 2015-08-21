@@ -13,30 +13,30 @@
 			<hr />
 			<div id="logo">
 				<h2>Logo</h2>
-				<div id="upload-container"></div>
+				<div id="upload-container"><img ng-src="/images/{{winery.logo_src}}" /></div>
 			</div>
 			<div id="winery-details">
 				<div id="winery-name">
 					<h2>Winery Name</h2>
-					<input type="text" />
+					<input type="text" ng-model="winery.name"/>
 				</div>
 				<div id="address">
 					<h2>Address</h2>
 					<div id="street">
 						<h3>street # and name</h3>
-						<input type="text" />
+						<input type="text" ng-model="winery.address.street" />
 					</div>
 					<div id="city">
 						<h3>city</h3>
-						<input type="text" />
+						<input type="text" ng-model="winery.address.city" />
 					</div>
 					<div id="state">
 						<h3>state</h3>
-						<input type="text" />
+						<input type="text" ng-model="winery.address.state"/>
 					</div>
 					<div id="zip">
 						<h3>zip code</h3>
-						<input type="text" />
+						<input type="text" ng-model="winery.address.zip"/>
 					</div>
 				</div>
 			</div>

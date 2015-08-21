@@ -1,4 +1,4 @@
-angular.module( 'WynoAdmin' ).controller( 'TastingMenuController', [
+angular.module( 'WynoAdmin' ).controller( 'WineListController', [
 '$scope',
 '$stateParams',
 '$http',

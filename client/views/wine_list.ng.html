@@ -13,120 +13,15 @@
 			<button id="add-wine"><img src="/images/plus-icon.svg"></button>
 		</div>
 		<div id="wines">
-			<div class="a-wine">
+			<div class="a-wine" ng-repeat="wine in wines">
 				<img src="/images/icon_120px.svg" />
 				<div class="primary-info">
-					<h1>2014 Salmon Run Rose</h1>
-					<h2>dry creek valley</h2>
-					<h2>800 cases produced</h2>
-					<h2>$2 | $3 | $100</h2>
+					<h1>{{ wine.name }}</h1>
+					<h2>{{ wine.location }}</h2>
+					<h2>{{ wine.cases_produced }} cases produced</h2>
+					<h2>${{ wine.price.per_glass }} | ${{ wine.price.per_bottle }} | ${{ wine.price.per_case }}</h2>
 				</div>
-				<p>peach. strawberry. key lime. herbal spice. Pair with fresh fruit and cheeses, smoked fish or spicy asian fare.</p>
-				<div class="clear-inline"></div>
-				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
-				</div>
-			</div>
-			<div class="a-wine">
-				<img src="/images/icon_120px.svg" />
-				<div class="primary-info">
-					<h1>2014 Salmon Run Rose</h1>
-					<h2>dry creek valley</h2>
-					<h2>800 cases produced</h2>
-					<h2>$2 | $3 | $100</h2>
-				</div>
-				<p>peach. strawberry. key lime. herbal spice. Pair with fresh fruit and cheeses, smoked fish or spicy asian fare.</p>
-				<div class="clear-inline"></div>
-				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
-				</div>
-			</div>
-			<div class="a-wine">
-				<img src="/images/icon_120px.svg" />
-				<div class="primary-info">
-					<h1>2014 Salmon Run Rose</h1>
-					<h2>dry creek valley</h2>
-					<h2>800 cases produced</h2>
-					<h2>$2 | $3 | $100</h2>
-				</div>
-				<p>peach. strawberry. key lime. herbal spice. Pair with fresh fruit and cheeses, smoked fish or spicy asian fare.</p>
-				<div class="clear-inline"></div>
-				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
-				</div>
-			</div>
-			<div class="a-wine">
-				<img src="/images/icon_120px.svg" />
-				<div class="primary-info">
-					<h1>2014 Salmon Run Rose</h1>
-					<h2>dry creek valley</h2>
-					<h2>800 cases produced</h2>
-					<h2>$2 | $3 | $100</h2>
-				</div>
-				<p>peach. strawberry. key lime. herbal spice. Pair with fresh fruit and cheeses, smoked fish or spicy asian fare.</p>
-				<div class="clear-inline"></div>
-				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
-				</div>
-			</div>
-			<div class="a-wine">
-				<img src="/images/icon_120px.svg" />
-				<div class="primary-info">
-					<h1>2014 Salmon Run Rose</h1>
-					<h2>dry creek valley</h2>
-					<h2>800 cases produced</h2>
-					<h2>$2 | $3 | $100</h2>
-				</div>
-				<p>peach. strawberry. key lime. herbal spice. Pair with fresh fruit and cheeses, smoked fish or spicy asian fare.</p>
-				<div class="clear-inline"></div>
-				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
-				</div>
-			</div>
-			<div class="a-wine">
-				<img src="/images/icon_120px.svg" />
-				<div class="primary-info">
-					<h1>2014 Salmon Run Rose</h1>
-					<h2>dry creek valley</h2>
-					<h2>800 cases produced</h2>
-					<h2>$2 | $3 | $100</h2>
-				</div>
-				<p>peach. strawberry. key lime. herbal spice. Pair with fresh fruit and cheeses, smoked fish or spicy asian fare.</p>
-				<div class="clear-inline"></div>
-				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
-				</div>
-			</div>
-			<div class="a-wine">
-				<img src="/images/icon_120px.svg" />
-				<div class="primary-info">
-					<h1>2014 Salmon Run Rose</h1>
-					<h2>dry creek valley</h2>
-					<h2>800 cases produced</h2>
-					<h2>$2 | $3 | $100</h2>
-				</div>
-				<p>peach. strawberry. key lime. herbal spice. Pair with fresh fruit and cheeses, smoked fish or spicy asian fare.</p>
-				<div class="clear-inline"></div>
-				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
-				</div>
-			</div>
-			<div class="a-wine">
-				<img src="/images/icon_120px.svg" />
-				<div class="primary-info">
-					<h1>2014 Salmon Run Rose</h1>
-					<h2>dry creek valley</h2>
-					<h2>800 cases produced</h2>
-					<h2>$2 | $3 | $100</h2>
-				</div>
-				<p>peach. strawberry. key lime. herbal spice. Pair with fresh fruit and cheeses, smoked fish or spicy asian fare.</p>
+				<p>{{ wine.description }}</p>
 				<div class="clear-inline"></div>
 				<div class="edit-and-delete">
 					<button class="edit">edit</button>
