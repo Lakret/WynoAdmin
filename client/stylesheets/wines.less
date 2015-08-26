@@ -33,6 +33,9 @@
 				&:hover {
 					background-color: @app-light-red;
 				}
+				&:focus {
+					outline: none;
+				}
 			}
 		}
 
@@ -47,7 +50,7 @@
 				height: 210px;
 				padding: 30px;
 				border-radius: 20px;
-				border: solid 1px white;
+				border: solid 1px transparent;
 
 				img {
 					display: block;
@@ -92,7 +95,7 @@
 						border-radius: 20px;
 						border: solid 1px @dark-grey-text;
 						color: @dark-grey-text;
-						background-color: white;
+						background-color: transparent;
 						&:hover {
 							color: white;
 							background-color: @dark-grey-text;

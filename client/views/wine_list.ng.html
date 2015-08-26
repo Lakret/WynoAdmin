@@ -10,7 +10,7 @@
 	<div id="content">
 		<div id="operations">
 			<input type="text" id="search" />
-			<button id="add-wine"><img src="/images/plus-icon.svg"></button>
+			<button id="add-wine" ng-click="showAddWinePopup()"><img src="/images/plus-icon.svg"></button>
 		</div>
 		<div id="wines">
 			<div class="a-wine" ng-repeat="wine in wines">
@@ -24,8 +24,64 @@
 				<p>{{ wine.description }}</p>
 				<div class="clear-inline"></div>
 				<div class="edit-and-delete">
-					<button class="edit">edit</button>
+					<button class="edit" ng-click="showEditWinePopup( wine._id )">edit</button>
 					<button class="delete">delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="popup-background" ng-show="adding_wine || editing_wine">
+		<div id="add-or-edit-wine-popup">
+			<button class="save-cancel-buttons" id="save-button">save</button>
+			<button class="save-cancel-buttons" id="cancel-button" ng-click="hideAddOrEditWinePopup()">cancel</button>
+			<div id="popup-content">
+				<div id="left-half">
+					<img id="wine-photo" src="/images/{{ temp_wine.photo }}" />
+					<button id="change-photo">change photo</button>
+				</div>
+				<div id="right-half">
+					<div id="wine-title" class="input-container">
+						<h3>wine title</h3>
+						<input type="text" ng-model="temp_wine.name"/>
+					</div>
+					<div id="vintage" class="input-container">
+						<h3>vintage</h3>
+						<input type="text" ng-model="temp_wine.vintage"/>
+					</div>
+					<div id="cases" class="input-container">
+						<h3>cases made</h3>
+						<input type="text" ng-model="temp_wine.cases_produced"/>
+					</div>
+					<div id="price" class="input-container">
+						<h3>price: glass | bottle | case</h3>
+						<input type="text" ng-model="temp_wine.price.per_glass"/>
+						<input type="text" ng-model="temp_wine.price.per_bottle"/>
+						<input type="text" ng-model="temp_wine.price.per_case"/>
+					</div>
+					<div id="location" class="input-container">
+						<h3>location</h3>
+						<input type="text" ng-model="temp_wine.location"/>
+					</div>	
+					<div id="description" class="input-container">
+						<h3>brief description</h3>
+						<textarea ng-model="temp_wine.description"></textarea>
+					</div>	
+					<div id="variety" class="input-container">
+						<h3>variety</h3>
+						<input type="text" ng-model="temp_wine.variety"/>
+					</div>
+					<div id="color" class="input-container">
+						<h3>type</h3>
+						<select ng-model="temp_wine.type">
+							<option value="champagne">Champagne</option>
+							<option value="rose">Rose</option>
+							<option value="white">White</option>
+							<option value="red">Red</option>
+						</select>
+					</div>
+					<div id="include-in-tasting">
+						<input type="checkbox" value="Bike" ng-checked="temp_wine.in_tasting" ng-model="temp_wine.in_tasting"/><p>Include in tasting menu</p>
+					</div>
 				</div>
 			</div>
 		</div>
