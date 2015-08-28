@@ -47,6 +47,11 @@ if (Meteor.isClient) {
               templateUrl: app_root + 'specials.ng.html',
               controller: 'SpecialsController',
             })
+            .state('wine_clubs', {
+              url: '/winery/:winery_id/wine_clubs',
+              templateUrl: app_root + 'wine_clubs.ng.html',
+              controller: 'WineClubsController'
+            })
 
         $urlRouterProvider.otherwise('/');
     } ] );

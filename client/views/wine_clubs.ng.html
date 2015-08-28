@@ -1,0 +1,67 @@
+<main id="wine-clubs">
+	<header id="header-hack"></header>
+	<header>
+		<div id="navigation">
+			<button id="home" ng-click="goHome()"></button>
+		</div>
+		<h1>Wine Clubs</h1>
+		<h2 id="user">Hi, Ginny</h2>
+	</header>
+	<div id="content">
+		<div id="operations">
+			<button id="add-wine-club" ng-click="addWineClub()"><img src="/images/plus-icon.svg"></button>
+		</div>
+		<div id="wine-clubs-list">
+			<div class="a-wine-club" ng-repeat="wine_club in wine_clubs">
+				<h1>{{ wine_club.title }}</h1>
+				<h3>{{ wine_club.package.quantity }} {{ wine_club.package.denomination }} per {{ wine_club.package.rate }}</h3>
+				<p>{{ wine_club.description }}</p>
+				<div class="edit-and-delete">
+					<button class="edit" ng-click="editWineClub( wine_club._id )">edit</button>
+					<button class="delete" ng-click="deleteWineClub( wine_club._id )">delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="popup-background" ng-show="editing || adding">
+		<div id="wine-clubs-popup">
+			<button class="save-cancel-buttons" id="save-button" ng-click="saveSpecial()">save</button>
+			<button class="save-cancel-buttons" id="cancel-button" ng-click="closePopup()">cancel</button>
+			<div id="wine-club-title" class="input-container">
+				<h3>title</h3>
+				<input type="text" ng-model="temp_wine_club.title"/>
+			</div>
+			<div id="denomination-per-rate" class="input-container">
+				<h3>package</h3>
+				<select>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+					<option>10</option>
+					<option>11</option>
+				</select>
+				<select>
+					<option>bottle(s)</option>
+					<option>case(s)</option>
+				</select>
+				<p>per</p>
+				<select>
+					<option>year</option>
+					<option>month</option>
+					<option>3 months</option>
+					<option>6 months</option>
+				</select>
+			</div>
+			<div id="wine-club-description" class="input-container">
+				<h3>description</h3>
+				<textarea ng-model="temp_wine_club.description"></textarea>
+			</div>
+		</div>
+	</div>
+</main>
