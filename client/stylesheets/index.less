@@ -114,7 +114,7 @@ hr {
 		margin-top: -330px;
 		z-index: 99;
 		width: 600px;
-		height: 400px;
+		min-height: 400px;
 		background-color: white;
 		border-radius: 20px;
 
@@ -273,7 +273,73 @@ hr {
 						font-size: 1.5em;
 					}
 				}
-				
+			}
+			#modules {
+				display: block;
+				float: left;
+				width: 100%;
+				h2 {
+					color: @light-grey-text;
+					font-weight: 300;
+					margin: 0 0 5px 0;
+				}
+
+				.a-module {
+					width: 31%;
+					margin: 0 2% 3% 0;
+					display: block;
+					float: left;
+					.directions {
+						color: @app-light-red;
+					}					
+				}
+
+				#low-down-module {
+					ul {
+						list-style: none;
+						margin: 5px 0 0 10px;
+						padding-left: 6%;
+						font-size: 1.1em;
+						color: @dark-grey-text;
+						li {
+							margin: 0 0 0 0;
+						} li:before {
+							position: relative;
+							left: -1em;
+							margin-right: -.5em;
+							padding: 0;
+							content: "\002022";
+							color: @dark-grey-text;
+						}
+					}
+				} #richness-module {
+					text-align: center;
+					margin-right: 30px;
+					h4 {
+						font-size: 1em;
+						font-weight: 300;
+						color: @light-grey-text;
+						margin: 0;
+					}
+				} #goes-well-with-module {
+					width: 25%;
+					ul {
+						list-style: none;
+						margin: 5px 0 0 0;
+						padding: 0 0 0 10px;
+						li {
+							margin-top: 2px;
+							input {
+								font-size: 1em;
+								width: 100px;
+								padding: 4px;
+							}
+						}
+					}
+				} #vintage-quality-module {
+					clear: none;
+					width: 60%;
+				}
 			}
 		}
 	}

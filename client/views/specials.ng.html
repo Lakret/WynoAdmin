@@ -9,7 +9,7 @@
 	</header>
 	<div id="content">
 		<div id="operations">
-			<button id="add-wine"><img src="/images/plus-icon.svg"></button>
+			<button id="add-special" ng-click="addSpecial()"><img src="/images/plus-icon.svg"></button>
 		</div>
 		<div id="specials-list">
 			<div class="a-special" ng-repeat="special in specials" ng-init="wine = wine_factory.getWineById( special.wine_id )">
@@ -21,9 +21,24 @@
 				</div>
 				<div class="clear-inline"></div>
 				<div class="edit-and-delete">
-					<button class="edit">edit</button>
-					<button class="delete">delete</button>
+					<button class="edit" ng-click="editSpecial( special._id )">edit</button>
+					<button class="delete" ng-click="deleteSpecial( special._id )">delete</button>
 				</div>
+			</div>
+		</div>
+	</div>
+	<div id="popup-background" ng-show="editing || adding">
+		<div id="specials-popup">
+			<button class="save-cancel-buttons" id="save-button" ng-click="saveSpecial()">save</button>
+			<button class="save-cancel-buttons" id="cancel-button" ng-click="closePopup()">cancel</button>
+			<div id="special-title">
+				<h3>special title</h3>
+				<input type="text" ng-model="temp_special.title"/>
+			</div>
+			<div id="individual-wine">
+				<input type="checkbox" ng-model="individual_wine">
+				<p>this special is for an individual wine</p>
+				<select ng-show="individual_wine" ng-model="temp_special.wine_id" ng-options="wine._id as wine.name for wine in wines"></select>
 			</div>
 		</div>
 	</div>
