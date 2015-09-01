@@ -5,7 +5,9 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 urigo:angular
 less
 angularui:angular-ui-router
+cfs:standard-packages
+cfs:dropbox
+cfs:gridfs

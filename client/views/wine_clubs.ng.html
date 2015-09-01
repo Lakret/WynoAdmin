@@ -14,7 +14,7 @@
 		<div id="wine-clubs-list">
 			<div class="a-wine-club" ng-repeat="wine_club in wine_clubs">
 				<h1>{{ wine_club.title }}</h1>
-				<h3>{{ wine_club.package.quantity }} {{ wine_club.package.denomination }} per {{ wine_club.package.rate }}</h3>
+				<h3>{{ wine_club.deal.quantity }} {{ wine_club.deal.denomination }} per {{ wine_club.deal.rate }}</h3>
 				<p>{{ wine_club.description }}</p>
 				<div class="edit-and-delete">
 					<button class="edit" ng-click="editWineClub( wine_club._id )">edit</button>
@@ -25,7 +25,7 @@
 	</div>
 	<div id="popup-background" ng-show="editing || adding">
 		<div id="wine-clubs-popup">
-			<button class="save-cancel-buttons" id="save-button" ng-click="saveSpecial()">save</button>
+			<button class="save-cancel-buttons" id="save-button" ng-click="saveWineClub()">save</button>
 			<button class="save-cancel-buttons" id="cancel-button" ng-click="closePopup()">cancel</button>
 			<div id="wine-club-title" class="input-container">
 				<h3>title</h3>
@@ -33,29 +33,30 @@
 			</div>
 			<div id="denomination-per-rate" class="input-container">
 				<h3>package</h3>
-				<select>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-					<option>7</option>
-					<option>8</option>
-					<option>9</option>
-					<option>10</option>
-					<option>11</option>
+				<select ng-model="temp_wine_club.deal.quantity" >
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
 				</select>
-				<select>
-					<option>bottle(s)</option>
-					<option>case(s)</option>
+				<select ng-model="temp_wine_club.deal.denomination">
+					<option value="bottle">bottle(s)</option>
+					<option value="case">case(s)</option>
 				</select>
 				<p>per</p>
-				<select>
-					<option>year</option>
-					<option>month</option>
-					<option>3 months</option>
-					<option>6 months</option>
+				<select ng-model="temp_wine_club.deal.rate">
+					<option value="year">year</option>
+					<option value="month">month</option>
+					<option value="3 months">3 months</option>
+					<option value="6 months">6 months</option>
+					<option value="season">season</option>
 				</select>
 			</div>
 			<div id="wine-club-description" class="input-container">

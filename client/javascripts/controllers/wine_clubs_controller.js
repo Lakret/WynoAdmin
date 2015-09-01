@@ -1,16 +1,11 @@
 angular.module( 'WynoAdmin' ).controller( 'WineClubsController', [
 '$scope',
 '$stateParams',
-'$http',
-'$location',
-'$rootScope',
 '$meteor',
-'WineFactory',
-function( $scope, $stateParams, $http, $location, $rootScope, $meteor, WineFactory ) {
-	/**
-	 * Initializes the scope
-	 */
+function( $scope, $stateParams, $meteor ) {
+
 	$scope.initializeScope = function() {
+		$scope.$meteorSubscribe( 'wine_clubs' );
 		$scope.temp_wine_club = {};
 		$scope.wine_clubs = $meteor.collection( function() {
 	        return WineClubs.find( {}, { sort: { created_at: 1 } } );
@@ -21,10 +16,37 @@ function( $scope, $stateParams, $http, $location, $rootScope, $meteor, WineFacto
 
 	$scope.addWineClub = function() {
 		$scope.adding = true;
+		$scope.temp_wine_club = {
+			winery_id: $stateParams.winery_id,
+			title: "",
+			deal: {
+				denomination: "bottle",
+				quantity: "1",
+				rate: "year",
+			}
+		}
 	}
 
-	$scope.editWineClub = function() {
+	$scope.editWineClub = function( id ) {
 		$scope.editing = true;
+		$scope.temp_wine_club = WineClubs.findOne( id )
+	}
+
+	$scope.deleteWineClub = function( id ) {
+		$meteor.call( 'deleteWineClub', id );
+	}
+
+	$scope.saveWineClub = function() {
+		$scope.temp_wine_club.deal.quantity = Number( $scope.temp_wine_club.deal.quantity )
+		if( $scope.editing ) {
+			$scope.temp_wine_club.updated_at = Date.now();
+			$meteor.call( 'updateWineClub', $scope.temp_wine_club );
+		} else if( $scope.adding ) {
+			$scope.temp_wine_club.created_at = Date.now();
+			$meteor.call( 'createWineClub', $scope.temp_wine_club );
+		}
+
+		$scope.closePopup();
 	}
 
 	$scope.closePopup = function() {

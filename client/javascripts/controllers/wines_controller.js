@@ -1,18 +1,16 @@
 angular.module( 'WynoAdmin' ).controller( 'WinesController', [
 '$scope',
 '$stateParams',
-'$http',
 '$location',
-'$rootScope',
 '$meteor',
-'WineFactory',
-function( $scope, $stateParams, $http, $location, $rootScope, $meteor, WineFactory ) {
+function( $scope, $stateParams, $location, $meteor ) {
 	$scope.adding_wine = false;
 	$scope.editing_wine = false;
 	$scope.temp_wine = {};
 
 	// Pull wines from DB
 	$scope.wines = $meteor.collection( function() {
+		$scope.$meteorSubscribe( 'wines' );
 		if( $location.path().split('/')[3] === 'tasting_menu')
 			return Wines.find( { winery_id: $stateParams.winery_id, in_tasting: true }, { sort: { created_at: 1 } } )
 	    return Wines.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } )
@@ -56,7 +54,7 @@ function( $scope, $stateParams, $http, $location, $rootScope, $meteor, WineFacto
 	 */
 	$scope.showEditWinePopup = function( id ) {
 		$scope.editing_wine = true;
-		angular.extend( $scope.temp_wine, WineFactory.getWineById( id ) );
+		angular.extend( $scope.temp_wine, Wines.findOne( id ) );
 	}
 
 	/**

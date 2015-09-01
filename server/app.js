@@ -1,9 +1,21 @@
-if (Meteor.isServer) {
-	Wines = new Mongo.Collection("wines");
-	WineClubs = new Mongo.Collection("wine_clubs");
-	Wineries = new Mongo.Collection("wineries");
-	Specials = new Mongo.Collection("specials");
-}
+Wines = new Mongo.Collection( "wines" );
+WineClubs = new Mongo.Collection( "wine_clubs" );
+Wineries = new Mongo.Collection( "wineries" );
+Specials = new Mongo.Collection( "specials" );
+
+Meteor.publish( 'wines', function () {
+    return Wines.find();
+});
+Meteor.publish( 'wine_clubs', function () {
+    return WineClubs.find();
+});
+Meteor.publish( 'wineries', function () {
+    return Wineries.find();
+});
+Meteor.publish( 'specials', function () {
+    return Specials.find();
+});
+
 
 Meteor.methods({
     /**
@@ -14,29 +26,7 @@ Meteor.methods({
         // if (! Meteor.userId()) {
         //   throw new Meteor.Error('not-authorized');
         // }
-        Wines.insert( {  
-            name: wine.name,
-            winery_id: wine.winery_id,
-            created_at: wine.created_at,
-            updated_at: wine.updated_at,
-            photo: wine.photo,
-            vintage: wine.vintage,
-            cases_produced: wine.cases_produced,
-            price:{  
-                per_glass: wine.price.per_glass,
-                per_bottle: wine.price.per_bottle,
-                per_case: wine.price.per_case
-            },
-            location: wine.location,
-            description: wine.description,
-            variety: wine.variety,
-            type: wine.type,
-            in_tasting: wine.in_tasting,
-            modules: {  
-                goes_well_with: wine.modules.goes_well_with,
-                richness: wine.modules.richness
-            }
-        } );
+        Wines.insert( wine );
     },
     updateWine: function( wine ) {
         Wines.update( wine._id, wine );
@@ -50,13 +40,7 @@ Meteor.methods({
      * Specials CRUD
      */
     createSpecial: function( special ) {
-        Specials.insert( {
-            title: special.title,
-            winery_id: special.winery_id,
-            created_at: special.created_at,
-            updated_at: special.updated_at,
-            wine_id: special.wine_id
-        } )
+        Specials.insert( special );
     },
     updateSpecial: function( special ) {
         Specials.update( special._id, special );
@@ -70,20 +54,22 @@ Meteor.methods({
      * Wineries CRUD
      */
     createWinery: function( winery ) {
-        Wineries.insert( {
-            name: winery.name,
-            created_at: winery.created_at,
-            updated_at: winery.updated_at,
-            address: {
-                street: winery.address.street,
-                city: winery.address.city,
-                state: winery.address.state,
-                zip: winery.address.zip
-            },
-            logo_src: winery.logo_src
-        })
+        Wineries.insert( winery );
     },
     updateWinery: function( winery ) {
         Wineries.update( winery._id, winery );
+    },
+
+    /**
+     * Wine Clubs CRUD
+     */
+    createWineClub: function( wine_club ) {
+        WineClubs.insert( wine_club );
+    },
+    updateWineClub: function( wine_club ) {
+        WineClubs.update( wine_club._id, wine_club );
+    },
+    deleteWineClub: function( wine_club_id ) {
+        WineClubs.remove( wine_club_id );
     }
 });

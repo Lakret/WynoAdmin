@@ -12,7 +12,7 @@
 			<button id="add-special" ng-click="addSpecial()"><img src="/images/plus-icon.svg"></button>
 		</div>
 		<div id="specials-list">
-			<div class="a-special" ng-repeat="special in specials" ng-init="wine = wine_factory.getWineById( special.wine_id )">
+			<div class="a-special" ng-repeat="special in specials" ng-init="wine = getAssociatedWine( special.wine_id )">
 				<h1 >{{ special.title }}</h1>
 				<div ng-if="special.wine_id" class="wine">
 					<h3 class="name">{{ wine.name }}</h3>

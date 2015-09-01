@@ -1,27 +1,29 @@
 angular.module( 'WynoAdmin' ).controller( 'SpecialsController', [
 '$scope',
 '$stateParams',
-'$http',
-'$location',
-'$rootScope',
 '$meteor',
-'WineFactory',
-function( $scope, $stateParams, $http, $location, $rootScope, $meteor, WineFactory ) {
+function( $scope, $stateParams, $meteor ) {
 	/**
 	 * Initializes the scope
 	 */
-	$scope.initializeScope = function() {
-		$scope.editing = false;
-		$scope.adding = false;
-		$scope.temp_special = {};
-		$scope.wine_factory = WineFactory;
+	$scope.editing = false;
+	$scope.adding = false;
+	$scope.temp_special = {};
+	$scope.$meteorSubscribe( 'wines' );
+	$scope.$meteorSubscribe( 'specials' );
+	$scope.specials = $meteor.collection( function() {
+        return Specials.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } );
+    });
 
-		$scope.specials = $meteor.collection( function() {
-	        return Specials.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } );
-	    });
+	/**
+	 * Fetches the wines from meteor collection and then returns the 
+	 * wine associated with each special (called from ng-if).
+	 */
+	$scope.getAssociatedWine = function( id ) {
 	    $scope.wines = $meteor.collection( function() {
 	    	return Wines.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } );
 	    })
+		return Wines.findOne( id );
 	}
 
 	/**
@@ -87,6 +89,4 @@ function( $scope, $stateParams, $http, $location, $rootScope, $meteor, WineFacto
 		$scope.adding = false;
 		$scope.temp_special = {};
 	}
-
-	$scope.initializeScope() 
 } ] );
