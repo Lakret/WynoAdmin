@@ -9,22 +9,40 @@ function( $scope, $stateParams, $meteor ) {
 	$scope.editing = false;
 	$scope.adding = false;
 	$scope.temp_special = {};
-	$scope.$meteorSubscribe( 'wines' );
-	$scope.$meteorSubscribe( 'specials' );
-	$scope.specials = $meteor.collection( function() {
-        return Specials.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } );
-    });
+	
+	/**
+	 * Gets specials from db and then initializes the scope variable
+	 */
+	$scope.$meteorSubscribe( 'specials' ).then( function() {
+		$scope.specials = $meteor.collection( function() {
+	        return Specials.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } );
+	    });
+
+	    /**
+		 * Gets wines from db and then initializes the scope variable.
+		 * Called in here because getAssociatedWines() is dependent on
+		 * the specials being loaded.
+		 */
+		$scope.$meteorSubscribe( 'wines' ).then( function() {
+			$scope.wines = $meteor.collection( function() {
+		        return Wines.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } );
+		    });
+		    $scope.getAssociatedWines();
+		})
+	});
+
+
 
 	/**
-	 * Fetches the wines from meteor collection and then returns the 
-	 * wine associated with each special (called from ng-if).
+	 * Gets the associated wines for each special during initialization
+	 * of the collections above
 	 */
-	$scope.getAssociatedWine = function( id ) {
-	    $scope.wines = $meteor.collection( function() {
-	    	return Wines.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } );
-	    })
-		return Wines.findOne( id );
-	}
+    $scope.getAssociatedWines = function() {
+    	var i;
+		for( i = 0; i < $scope.specials.length; i++ ) {
+			$scope.specials[ i ].associated_wine = Wines.findOne( $scope.specials[ i ].wine_id )
+		}
+    }
 
 	/**
 	 * When user clicks edit on a special, this is called to open 
@@ -65,12 +83,16 @@ function( $scope, $stateParams, $meteor ) {
 
 		if( $scope.adding ) {
 			$scope.temp_special.created_at = Date.now();
-			$meteor.call( 'createSpecial', $scope.temp_special );
+			$meteor.call( 'createSpecial', $scope.temp_special ).then( function() {
+				$scope.getAssociatedWines() 
+			});
 		} else if( $scope.editing ) {
 			$scope.temp_special.updated_at = Date.now();
-			$meteor.call( 'updateSpecial', $scope.temp_special );
+			$meteor.call( 'updateSpecial', $scope.temp_special ).then( function() {
+				$scope.getAssociatedWines() 
+			});
 		}
-
+		
 		$scope.closePopup();
 	}
 
