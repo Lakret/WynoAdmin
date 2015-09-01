@@ -1,8 +1,9 @@
 angular.module( 'WynoAdmin' ).controller( 'WinerySettingsController', [
 '$scope',
+'$rootScope',
 '$stateParams',
 '$meteor',
-function( $scope, $stateParams, $meteor ) {
+function( $scope, $rootScope, $stateParams, $meteor ) {
 	$scope.initializeScope = function() {
 		$scope.temp_winery = {};
 		$scope.$meteorSubscribe( 'wineries' ).then( function() {
