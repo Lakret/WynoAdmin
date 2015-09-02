@@ -5,7 +5,10 @@
 			<button id="home" ng-click="goHome()"></button>
 		</div>
 		<h1>Entire Wine List</h1>
-		<h2 id="user">Hi, Ginny</h2>
+		<div id="user-container" ng-mouseleave="show_user_options = false">
+			<h2 id="user" ng-mouseover="show_user_options = true" >Hi, {{ currentUser.profile.first_name }}</h2>
+			<h2 id="logout-button" ng-show="show_user_options" ng-click="logout()">logout</h2>
+		</div>
 	</header>
 	<div id="content">
 		<div id="operations">

@@ -8,14 +8,15 @@
 }
 
 #splash-login-container {
+	overflow: auto;
 	position: relative;
 	left: 50%;
-	margin-left: -275px;
+	margin-left: -305px;
 	margin-top: 15%;
-	padding: 20px 40px 0 40px;
+	padding: 20px 40px 0px 40px;
 	background-color: white;
 	width: 450px;
-	height: 295px;
+	min-height: 295px;
 	border-radius: 20px;
 	opacity: .92;
 	text-align: center;
@@ -45,10 +46,36 @@
 			outline: none;
 		}
 	}
+	#login-error {
+		margin: 10px 0 0 0;
+		font-size: 2em;
+		color: @app-red;
+	}
+	#create-and-forgot-container {
+		text-align: right;
+		padding: 12px 0 0 0;
+		margin: 10px 0 0 20px;
+		width: 200px;
+		display: block;
+		float: left;
+		p {
+			cursor: pointer;
+			margin: 0;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		#create-account-text {
+			font-size: 1.2em;
+			color: @dark-grey-text;
+		}
+	}
 	button {
+		display: block;
+		float: left;
 		width: 140px;
 		height: 60px;
-		margin: 15px 0 0 0;
+		margin: 10px 0 0 0;
 		background-color: transparent;
 		border: none;
 		cursor: pointer;
@@ -67,5 +94,22 @@
 	}
 	:-ms-input-placeholder {  
 	   color: @dark-grey-text;  
+	}
+}
+
+#create-account-popup {
+	text-align: center;
+	background-color: white;
+	width: 320px;
+	height: 280px;
+	border-radius: 20px;
+	position: fixed;
+	left: 50%;
+	top: 30%;
+	margin: 0 0 0 -220px;
+	padding: 20px;
+
+	h3 {
+		display: inline;
 	}
 }

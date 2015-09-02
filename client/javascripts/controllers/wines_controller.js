@@ -1,20 +1,26 @@
+/**
+ * This controller is used for both tasting_menu and wine_list
+ * since all functionality is the same. Tasting menu only wines
+ * are returned in the meteor collection query.
+ */
 angular.module( 'WynoAdmin' ).controller( 'WinesController', [
 '$scope',
 '$stateParams',
 '$location',
 '$meteor',
 function( $scope, $stateParams, $location, $meteor ) {
+	$scope.$meteorSubscribe( 'wines' ).then( function() {
+		$scope.wines = $meteor.collection( function() {
+			// check if were in tasting menu...
+			if( $location.path().split('/')[3] === 'tasting_menu')
+				return Wines.find( { winery_id: $stateParams.winery_id, in_tasting: true }, { sort: { created_at: 1 } } )
+			// if not, were in all wines
+		    return Wines.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } )
+		});
+	});
 	$scope.adding_wine = false;
 	$scope.editing_wine = false;
 	$scope.temp_wine = {};
-
-	// Pull wines from DB
-	$scope.wines = $meteor.collection( function() {
-		$scope.$meteorSubscribe( 'wines' );
-		if( $location.path().split('/')[3] === 'tasting_menu')
-			return Wines.find( { winery_id: $stateParams.winery_id, in_tasting: true }, { sort: { created_at: 1 } } )
-	    return Wines.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } )
-	});
 
 	/**
 	 * Shows the popup and sets state to adding a new wine.

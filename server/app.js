@@ -33,6 +33,7 @@ Meteor.methods({
     },
     deleteWine: function ( wine_id ) {
         Wines.remove( wine_id );
+        Specials.remove( { wine_id: wine_id } );
     },
 
 

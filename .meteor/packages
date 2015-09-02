@@ -11,3 +11,5 @@ angularui:angular-ui-router
 cfs:standard-packages
 cfs:dropbox
 cfs:gridfs
+accounts-base
+accounts-password

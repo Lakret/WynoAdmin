@@ -3,35 +3,20 @@ angular.module( 'WynoAdmin' ).controller( 'SpecialsController', [
 '$stateParams',
 '$meteor',
 function( $scope, $stateParams, $meteor ) {
-	/**
-	 * Initializes the scope
-	 */
 	$scope.editing = false;
 	$scope.adding = false;
 	$scope.temp_special = {};
-	
-	/**
-	 * Gets specials from db and then initializes the scope variable
-	 */
 	$scope.$meteorSubscribe( 'specials' ).then( function() {
 		$scope.specials = $meteor.collection( function() {
 	        return Specials.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } );
 	    });
-
-	    /**
-		 * Gets wines from db and then initializes the scope variable.
-		 * Called in here because getAssociatedWines() is dependent on
-		 * the specials being loaded.
-		 */
-		$scope.$meteorSubscribe( 'wines' ).then( function() {
-			$scope.wines = $meteor.collection( function() {
-		        return Wines.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } );
-		    });
-		    $scope.getAssociatedWines();
-		})
 	});
-
-
+	$scope.$meteorSubscribe( 'wines' ).then( function() {
+		$scope.wines = $meteor.collection( function() {
+	        return Wines.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } );
+	    });
+	    $scope.getAssociatedWines();
+	})
 
 	/**
 	 * Gets the associated wines for each special during initialization

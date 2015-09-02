@@ -2,8 +2,31 @@
 	<main id="splash-login-container">
 		<img id="splash-logo" src="/images/icon_120px.svg" />
 		<h1>Admin Login</h1>
-		<input type="text" id="username" placeholder="username"/>
-		<input type="text" id="password" placeholder="password"/>
+		<input type="text" id="username" ng-model="login.email" placeholder="username"/>
+		<input type="password" id="password" ng-model="login.password" placeholder="password"/>
+		<p id="login-error" ng-show="login_error">error logging in</p>
+		<div id="create-and-forgot-container">
+			<p id="create-account-text" ng-click="openCreateAccountPopup()">create account</p>
+			<p id="create-account-text">forgot password</p>
+		</div>
 		<button ng-click="submitLogin()"><img src="/images/tasting_ready_button.svg" /></button>
 	</main>
+</div>
+
+<div id="popup-background" ng-show="creating_account || forgetting_password">
+	<div id="create-account-popup">
+		<h3>first name:</h3><input type="text" ng-model="new_admin.first_name"/>
+		<br />
+		<h3>last name:</h3><input type="text" ng-model="new_admin.last_name"/>
+		<br />
+		<h3>email:</h3><input type="text" ng-model="new_admin.email"/>
+		<br />
+		<h3>password:</h3><input type="password" ng-model="new_admin.password"/>
+		<br />
+		<h3>winery:</h3><select ng-model="new_admin.winery" ng-options="winery._id as winery.name for winery in wineries"></select>
+		<br />
+		<br />
+		<button ng-click="closeCreateAccountPopup()">cancel</button>
+		<button ng-click="createAdminAccount()">submit</button>
+	</div>
 </div>

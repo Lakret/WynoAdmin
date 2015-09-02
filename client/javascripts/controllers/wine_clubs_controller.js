@@ -3,16 +3,15 @@ angular.module( 'WynoAdmin' ).controller( 'WineClubsController', [
 '$stateParams',
 '$meteor',
 function( $scope, $stateParams, $meteor ) {
-
-	$scope.initializeScope = function() {
-		$scope.$meteorSubscribe( 'wine_clubs' );
-		$scope.temp_wine_club = {};
+	$scope.$meteorSubscribe( 'wine_clubs' ).then( function() {
 		$scope.wine_clubs = $meteor.collection( function() {
 	        return WineClubs.find( {}, { sort: { created_at: 1 } } );
 	    });
-		$scope.editing = false;
-		$scope.adding = false;
-	}
+	});
+	$scope.temp_wine_club = {};
+	$scope.editing = false;
+	$scope.adding = false;
+	
 
 	$scope.addWineClub = function() {
 		$scope.adding = true;
@@ -54,6 +53,4 @@ function( $scope, $stateParams, $meteor ) {
 		$scope.editing = false;
 		$scope.temp_wine_club = {};
 	}
-
-	$scope.initializeScope() 
 } ] );
