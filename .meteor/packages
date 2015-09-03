@@ -13,3 +13,4 @@ cfs:dropbox
 cfs:gridfs
 accounts-base
 accounts-password
+aldeed:collection2

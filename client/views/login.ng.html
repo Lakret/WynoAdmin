@@ -1,4 +1,4 @@
-<div id="login-background">
+<div id="login-background" ng-enter="submitLogin()">
 	<main id="splash-login-container">
 		<img id="splash-logo" src="/images/icon_120px.svg" />
 		<h1>Admin Login</h1>
@@ -15,18 +15,20 @@
 
 <div id="popup-background" ng-show="creating_account || forgetting_password">
 	<div id="create-account-popup">
-		<h3>first name:</h3><input type="text" ng-model="new_admin.first_name"/>
-		<br />
-		<h3>last name:</h3><input type="text" ng-model="new_admin.last_name"/>
-		<br />
-		<h3>email:</h3><input type="text" ng-model="new_admin.email"/>
-		<br />
-		<h3>password:</h3><input type="password" ng-model="new_admin.password"/>
-		<br />
-		<h3>winery:</h3><select ng-model="new_admin.winery" ng-options="winery._id as winery.name for winery in wineries"></select>
-		<br />
-		<br />
-		<button ng-click="closeCreateAccountPopup()">cancel</button>
-		<button ng-click="createAdminAccount()">submit</button>
+		<h3>Create Account</h3>
+		<h3 id="other-error">{{ create_account_errors.other }}</h3>
+		<h6 class="error" ng-show="create_account_errors.first_name">first name must be at least 2 characters</h6>
+		<input type="text" placeholder="First Name" ng-model="new_admin.first_name">
+		<h6 class="error" ng-show="create_account_errors.last_name">last name must be at least 2 characters</h6>
+		<input type="text" placeholder="Last Name" ng-model="new_admin.last_name">
+		<h6 class="error" ng-show="create_account_errors.invalid_email">invalid email</h6>
+		<input type="text" placeholder="Email" ng-model="new_admin.email">
+		<h6 class="error" ng-show="create_account_errors.password">must be at least 6 characters</h6>
+		<input type="password" placeholder="Password" ng-model="new_admin.password">
+		<h6 class="error" ng-show="create_account_errors.winery">winery required</h6>
+		<select class="form-control" ng-model="new_admin.winery" ng-options="winery._id as winery.name for winery in wineries"></select>
+		<div class="clear-inline"></div>
+		<button id="cancel-button" class="btn btn-default" ng-click="closeCreateAccountPopup()">cancel</button>
+		<button id="save-button" class="btn btn-default" ng-click="createAdminAccount()">submit</button>
 	</div>
 </div>

@@ -10,6 +10,7 @@ function( $scope, $rootScope, $state, $location, $meteor ) {
 	$scope.creating_account = false;
 	$scope.forgetting_password = false;
 	$scope.new_admin = {};
+	$scope.create_account_errors = {};
 	$scope.$meteorSubscribe( 'wineries' ).then( function() {
 		$scope.wineries = $meteor.collection( function() {
 	        return Wineries.find()
@@ -25,7 +26,7 @@ function( $scope, $rootScope, $state, $location, $meteor ) {
 			$scope.login_error = false;
 		   	$location.path( '/winery/' + $rootScope.currentUser.profile.winery_id );
 		}, function( err ){
-		    $scope.login_error = true;
+			$scope.login_error = true;
 		});
 	}
 
@@ -46,9 +47,11 @@ function( $scope, $rootScope, $state, $location, $meteor ) {
 
 	/**
 	 * Creates an account when user presses submit in the
-	 * create account popup
+	 * create account popup. If there are errors in their
+	 * form, this will display them.
 	 */
 	$scope.createAdminAccount = function() {
+		// call createUser meteor method
 		$meteor.createUser({
 		    email: $scope.new_admin.email,
 		    password: $scope.new_admin.password,
@@ -58,13 +61,43 @@ function( $scope, $rootScope, $state, $location, $meteor ) {
 		    	admin: true,
 		    	winery_id: $scope.new_admin.winery
 		    }
-		}).then(function(){
+		}).then( function(){
 		   	$location.path( '/winery/' + $rootScope.currentUser.profile.winery_id );
 		}, function(err){
-			console.log('Login error - ', err);
+		    displayErrors( err );
 		});
 
-		$scope.closeCreateAccountPopup();
+		// called from error function of createUser
+		function displayErrors( err ) {
+			var details, i;
+			// clear all previous errors
+			$scope.create_account_errors = {};
+			// if there aren't details, display the reason to user
+			if( !err.details ) {
+				$scope.create_account_errors.other = err.reason;
+				return;
+			}
+			// display individual field errors
+			details = JSON.parse( err.details ) 
+			for( i = 0; i < details.length; i++ ) {
+		    	switch( details[ i ].name ) {
+		    		case "emails.0.address":
+		    			$scope.create_account_errors.invalid_email = true;
+		    			break;
+		    		case "profile.first_name":
+		    			$scope.create_account_errors.first_name = true;
+		    			break;
+		    		case "profile.last_name":
+		    			$scope.create_account_errors.last_name = true;
+		    			break;
+		    		case "profile.winery_id":
+		    			$scope.create_account_errors.winery = true;
+		    			break;
+		    		default:
+		    			break;
+		    	}
+		    }
+		}
 	}
 
 	/**

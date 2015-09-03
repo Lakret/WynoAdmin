@@ -11,7 +11,7 @@ angular.module( 'WynoAdmin' ).controller( 'WinesController', [
 function( $scope, $stateParams, $location, $meteor ) {
 	$scope.$meteorSubscribe( 'wines' ).then( function() {
 		$scope.wines = $meteor.collection( function() {
-			// check if were in tasting menu...
+			// check if we're in tasting menu
 			if( $location.path().split('/')[3] === 'tasting_menu')
 				return Wines.find( { winery_id: $stateParams.winery_id, in_tasting: true }, { sort: { created_at: 1 } } )
 			// if not, were in all wines

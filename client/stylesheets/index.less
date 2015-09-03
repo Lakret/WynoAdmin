@@ -111,242 +111,242 @@ hr {
 	height: 100vh;
 	background-color: rgba(51,51,51,.5);
 	z-index: 101;
+}
 
-	#add-or-edit-wine-popup {
-		position: fixed;
-		left: 50%;
-		top: 50%;
-		padding: 20px;
-		margin-left: -300px;
-		margin-top: -330px;
-		z-index: 99;
-		width: 600px;
-		min-height: 400px;
+#add-or-edit-wine-popup {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	padding: 20px;
+	margin-left: -300px;
+	margin-top: -330px;
+	z-index: 99;
+	width: 600px;
+	min-height: 400px;
+	background-color: white;
+	border-radius: 20px;
+
+	.save-cancel-buttons {
+		display: block;
+		float: right;
+		font-size: 1em;
+		padding: 8px 25px;
+		border-radius: 5px;
+		cursor: pointer;
+		&:focus {
+			outline: none;
+		}
+	}
+	#save-button {
+		background-color: @app-red;
+		color: white;
+		border: solid 1px @app-red;
+		&:hover {
+			background-color: @app-light-red;
+		}
+	}
+	#cancel-button {
 		background-color: white;
-		border-radius: 20px;
+		color: @app-red;
+		border: solid 1px @app-red;
+		margin-right: 10px;
+	}
 
-		.save-cancel-buttons {
+	#popup-content {
+		margin-top: 50px;
+
+		#left-half {
 			display: block;
-			float: right;
-			font-size: 1em;
-			padding: 8px 25px;
+			float: left;
+			width: 180px;
+			text-align: center;
+			margin: 0 10px 0 10px;
+			#wine-photo {
+				width: 180px;
+				height: 180px;
+				border-radius: 90px;
+				background-color: @app-light-red;
+			}
+			#change-photo {
+				padding: 10px 20px;
+				color: @dark-grey-text;
+				background-color: white;
+				font-size: 1.2em;
+				border: solid @dark-grey-text 1px;
+				border-radius: 8px;
+				margin: 15px 5px 0 10px;
+				cursor: pointer;
+				&:focus {
+					outline: none;
+				} &:hover {
+					background-color: @dark-grey-text;
+					color: white;
+				}
+			}
+		}
+
+		input {
+			border: none;
+			background-color: @light-grey-element;
 			border-radius: 5px;
-			cursor: pointer;
+			padding: 7px 0 7px 10px;
+			font-size: 1.4em;
+			&:focus {
+				outline: none;
+			}
+		} textarea {
+			resize: none;
+			border: none;
+			background-color: @light-grey-element;
+			border-radius: 5px;
+			padding: 7px 0 7px 10px;
+			font-size: 1.4em;
 			&:focus {
 				outline: none;
 			}
 		}
-		#save-button {
-			background-color: @app-red;
-			color: white;
-			border: solid 1px @app-red;
-			&:hover {
-				background-color: @app-light-red;
-			}
+		h3 {
+			font-size: 1.1em;
+			padding-left: 3px;
+			font-weight: 300;
+			color: @light-grey-text;
+			margin: 0px;
 		}
-		#cancel-button {
-			background-color: white;
-			color: @app-red;
-			border: solid 1px @app-red;
-			margin-right: 10px;
-		}
-
-		#popup-content {
-			margin-top: 50px;
-
-			#left-half {
-				display: block;
+		#right-half {
+			display: block;
+			float: left;
+			margin: 0 0 0 20px;
+			width: 380px;
+			.input-container {
 				float: left;
-				width: 180px;
-				text-align: center;
-				margin: 0 10px 0 10px;
-				#wine-photo {
+			}
+			#wine-title {
+				input {
+					width: 220px;
+				}
+			} #vintage {
+				margin-left: 10px;
+				input {
+					width: 50px;
+				}
+			} #cases {
+				margin-left: 10px;
+				input {
+					width: 50px;
+				}
+			} #price {
+				clear: left;
+				margin-top: 5px;
+				input {
+					width: 50px;
+					padding-left: 5px;
+				}
+			} #location {
+				margin-left: 10px;
+				margin-top: 5px;
+				input {
 					width: 180px;
-					height: 180px;
-					border-radius: 90px;
-					background-color: @app-light-red;
 				}
-				#change-photo {
-					padding: 10px 20px;
-					color: @dark-grey-text;
-					background-color: white;
-					font-size: 1.2em;
-					border: solid @dark-grey-text 1px;
-					border-radius: 8px;
-					margin: 15px 5px 0 10px;
-					cursor: pointer;
-					&:focus {
-						outline: none;
-					} &:hover {
-						background-color: @dark-grey-text;
-						color: white;
-					}
+			} #description {
+				margin-top: 5px;
+				clear: both;
+				textarea {
+					width: 360px;
+					height: 60px;
 				}
-			}
-
-			input {
-				border: none;
-				background-color: @light-grey-element;
-				border-radius: 5px;
-				padding: 7px 0 7px 10px;
-				font-size: 1.4em;
-				&:focus {
-					outline: none;
+			} #color {
+				margin-left: 10px;				
+				select {
+					height: 30px;
 				}
-			} textarea {
-				resize: none;
-				border: none;
-				background-color: @light-grey-element;
-				border-radius: 5px;
-				padding: 7px 0 7px 10px;
-				font-size: 1.4em;
-				&:focus {
-					outline: none;
+			} #variety {
+				input {
+					width: 200px;
 				}
-			}
-			h3 {
-				font-size: 1.1em;
-				padding-left: 3px;
-				font-weight: 300;
-				color: @light-grey-text;
-				margin: 0px;
-			}
-			#right-half {
-				display: block;
-				float: left;
-				margin: 0 0 0 20px;
-				width: 380px;
-				.input-container {
-					float: left;
-				}
-				#wine-title {
-					input {
-						width: 220px;
-					}
-				} #vintage {
-					margin-left: 10px;
-					input {
-						width: 50px;
-					}
-				} #cases {
-					margin-left: 10px;
-					input {
-						width: 50px;
-					}
-				} #price {
-					clear: left;
-					margin-top: 5px;
-					input {
-						width: 50px;
-						padding-left: 5px;
-					}
-				} #location {
-					margin-left: 10px;
-					margin-top: 5px;
-					input {
-						width: 180px;
-					}
-				} #description {
-					margin-top: 5px;
-					clear: both;
-					textarea {
-						width: 360px;
-						height: 60px;
-					}
-				} #color {
-					margin-left: 10px;				
-					select {
-						height: 30px;
-					}
-				} #variety {
-					input {
-						width: 200px;
-					}
-				} #include-in-tasting {
-					clear: both;
-					input {
-						display: block;
-						float: left;
-						margin-left: 2px;
-						margin-top: 10px;
-						margin-right: 5px;
-					}
-					p {
-						text-align: left;
-						margin-top: 6px;
-						display: block;
-						width: 200px;
-						float: left;
-						font-size: 1.5em;
-					}
-				}
-			}
-			#modules {
-				display: block;
-				float: left;
-				width: 100%;
-				h2 {
-					color: @light-grey-text;
-					font-weight: 300;
-					margin: 0 0 5px 0;
-				}
-
-				.a-module {
-					width: 31%;
-					margin: 0 2% 3% 0;
+			} #include-in-tasting {
+				clear: both;
+				input {
 					display: block;
 					float: left;
-					.directions {
-						color: @app-light-red;
-					}					
+					margin-left: 2px;
+					margin-top: 10px;
+					margin-right: 5px;
 				}
+				p {
+					text-align: left;
+					margin-top: 6px;
+					display: block;
+					width: 200px;
+					float: left;
+					font-size: 1.5em;
+				}
+			}
+		}
+		#modules {
+			display: block;
+			float: left;
+			width: 100%;
+			h2 {
+				color: @light-grey-text;
+				font-weight: 300;
+				margin: 0 0 5px 0;
+			}
 
-				#low-down-module {
-					ul {
-						list-style: none;
-						margin: 5px 0 0 10px;
-						padding-left: 6%;
-						font-size: 1.1em;
+			.a-module {
+				width: 31%;
+				margin: 0 2% 3% 0;
+				display: block;
+				float: left;
+				.directions {
+					color: @app-light-red;
+				}					
+			}
+
+			#low-down-module {
+				ul {
+					list-style: none;
+					margin: 5px 0 0 10px;
+					padding-left: 6%;
+					font-size: 1.1em;
+					color: @dark-grey-text;
+					li {
+						margin: 0 0 0 0;
+					} li:before {
+						position: relative;
+						left: -1em;
+						margin-right: -.5em;
+						padding: 0;
+						content: "\002022";
 						color: @dark-grey-text;
-						li {
-							margin: 0 0 0 0;
-						} li:before {
-							position: relative;
-							left: -1em;
-							margin-right: -.5em;
-							padding: 0;
-							content: "\002022";
-							color: @dark-grey-text;
-						}
 					}
-				} #richness-module {
-					text-align: center;
-					margin-right: 30px;
-					h4 {
-						font-size: 1em;
-						font-weight: 300;
-						color: @light-grey-text;
-						margin: 0;
-					}
-				} #goes-well-with-module {
-					width: 25%;
-					ul {
-						list-style: none;
-						margin: 5px 0 0 0;
-						padding: 0 0 0 10px;
-						li {
-							margin-top: 2px;
-							input {
-								font-size: 1em;
-								width: 100px;
-								padding: 4px;
-							}
-						}
-					}
-				} #vintage-quality-module {
-					clear: none;
-					width: 60%;
 				}
+			} #richness-module {
+				text-align: center;
+				margin-right: 30px;
+				h4 {
+					font-size: 1em;
+					font-weight: 300;
+					color: @light-grey-text;
+					margin: 0;
+				}
+			} #goes-well-with-module {
+				width: 25%;
+				ul {
+					list-style: none;
+					margin: 5px 0 0 0;
+					padding: 0 0 0 10px;
+					li {
+						margin-top: 2px;
+						input {
+							font-size: 1em;
+							width: 100px;
+							padding: 4px;
+						}
+					}
+				}
+			} #vintage-quality-module {
+				clear: none;
+				width: 60%;
 			}
 		}
 	}
