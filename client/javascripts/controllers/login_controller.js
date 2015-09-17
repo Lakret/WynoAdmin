@@ -58,7 +58,7 @@ function( $scope, $rootScope, $state, $location, $meteor ) {
 		    profile: { 
 		    	first_name: $scope.new_admin.first_name,
 		    	last_name: $scope.new_admin.last_name,
-		    	admin: true,
+		    	role: "admin",
 		    	winery_id: $scope.new_admin.winery
 		    }
 		}).then( function(){

@@ -18,7 +18,12 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: 'WineryHomeController',
             resolve: {
                 "currentUser": ["$meteor", function($meteor){
-                    return $meteor.requireUser();
+                    return $meteor.requireValidUser(function(user) {
+                        if( user.profile.role !== "admin" )
+                            return "AUTH_REQUIRED";
+                        else
+                            return true;
+                    });
                 }]
             }
         })
@@ -28,7 +33,12 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: 'WinesController',
             resolve: {
                 "currentUser": ["$meteor", function($meteor){
-                    return $meteor.requireUser();
+                    return $meteor.requireValidUser(function(user) {
+                        if( user.profile.role !== "admin" )
+                            return "AUTH_REQUIRED";
+                        else
+                            return true;
+                    });
                 }]
             }
         })
@@ -38,7 +48,12 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: 'WinesController',
             resolve: {
                 "currentUser": ["$meteor", function($meteor){
-                    return $meteor.requireUser();
+                    return $meteor.requireValidUser(function(user) {
+                        if( user.profile.role !== "admin" )
+                            return "AUTH_REQUIRED";
+                        else
+                            return true;
+                    });
                 }]
             }
         })
@@ -48,7 +63,12 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: 'WinerySettingsController',
             resolve: {
                 "currentUser": ["$meteor", function($meteor){
-                    return $meteor.requireUser();
+                    return $meteor.requireValidUser(function(user) {
+                        if( user.profile.role !== "admin" )
+                            return "AUTH_REQUIRED";
+                        else
+                            return true;
+                    });
                 }]
             }
         })
@@ -58,7 +78,12 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: 'SpecialsController',
             resolve: {
                 "currentUser": ["$meteor", function($meteor){
-                    return $meteor.requireUser();
+                    return $meteor.requireValidUser(function(user) {
+                        if( user.profile.role !== "admin" )
+                            return "AUTH_REQUIRED";
+                        else
+                            return true;
+                    });
                 }]
             }
         })
@@ -68,7 +93,12 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: 'WineClubsController',
             resolve: {
                 "currentUser": ["$meteor", function($meteor){
-                    return $meteor.requireUser();
+                    return $meteor.requireValidUser(function(user) {
+                        if( user.profile.role !== "admin" )
+                            return "AUTH_REQUIRED";
+                        else
+                            return true;
+                    });
                 }]
             }
         })

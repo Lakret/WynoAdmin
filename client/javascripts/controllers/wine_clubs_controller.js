@@ -22,6 +22,7 @@ function( $scope, $stateParams, $meteor ) {
 				denomination: "bottle",
 				quantity: "1",
 				rate: "year",
+				price: "12.99"
 			}
 		}
 	}

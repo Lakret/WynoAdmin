@@ -17,7 +17,7 @@
 		<div id="wine-clubs-list">
 			<div class="a-wine-club" ng-repeat="wine_club in wine_clubs">
 				<h1>{{ wine_club.title }}</h1>
-				<h3>{{ wine_club.deal.quantity }} {{ wine_club.deal.denomination }} per {{ wine_club.deal.rate }}</h3>
+				<h3>{{ wine_club.deal.quantity }} {{ wine_club.deal.denomination }} per {{ wine_club.deal.rate }} | ${{ wine_club.deal.price }}</h3>
 				<p>{{ wine_club.description }}</p>
 				<div class="edit-and-delete">
 					<button class="edit" ng-click="editWineClub( wine_club._id )">edit</button>
@@ -50,8 +50,8 @@
 					<option value="11">11</option>
 				</select>
 				<select ng-model="temp_wine_club.deal.denomination">
-					<option value="bottle">bottle(s)</option>
-					<option value="case">case(s)</option>
+					<option value="bottles">bottle(s)</option>
+					<option value="cases">case(s)</option>
 				</select>
 				<p>per</p>
 				<select ng-model="temp_wine_club.deal.rate">
@@ -61,6 +61,10 @@
 					<option value="6 months">6 months</option>
 					<option value="season">season</option>
 				</select>
+			</div>
+			<div id="wine-club-price" class="input-container">
+				<h3>price</h3>
+				<input type="text" ng-model="temp_wine_club.deal.price"/> $ / year
 			</div>
 			<div id="wine-club-description" class="input-container">
 				<h3>description</h3>

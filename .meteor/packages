@@ -8,9 +8,8 @@ meteor-platform
 urigo:angular
 less
 angularui:angular-ui-router
-cfs:standard-packages
-cfs:dropbox
-cfs:gridfs
 accounts-base
 accounts-password
 aldeed:collection2
+cfs:standard-packages
+cfs:gridfs

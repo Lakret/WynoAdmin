@@ -16,7 +16,7 @@
 			<hr />
 			<div id="logo">
 				<h2>Logo</h2>
-				<div id="upload-container"><img ng-src="/images/{{temp_winery.logo_src}}" /></div>
+				<div id="upload-container"><img ng-src="images[0].url()" /></div>
 			</div>
 			<div id="winery-details">
 				<div id="winery-name">
@@ -47,7 +47,7 @@
 		<div id="cancel-or-save">
 			<button ng-click="goHome()">cancel</button>
 			<button ng-click="updateWinery()">save</button>
-			<input type="file" name="winery_logo" class="myFileInput">
+			<input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
 		</div>
 	</div>
 </main>
