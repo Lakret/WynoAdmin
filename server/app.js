@@ -39,11 +39,14 @@ Meteor.methods({
         }
         Wines.insert( wine );
     },
-    updateWine: function( wine ) {
+    updateWine: function( wine, oldImageId ) {
         if ( !Meteor.userId() ) {
           throw new Meteor.Error('not-authorized');
         }
         Wines.update( wine._id, wine );
+        if (oldImageId) {
+          Images.remove(oldImageId);
+        }
     },
     deleteWine: function ( wine_id ) {
         if ( !Meteor.userId() ) {

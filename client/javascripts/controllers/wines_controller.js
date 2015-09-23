@@ -81,6 +81,11 @@ function( $scope, $stateParams, $location, $meteor ) {
   $scope.winePhotoImageCropped = '';
 
   var handleFileSelect = function(evt) {
+    if ($scope.temp_wine.photo) {
+      $scope.oldImageId = $scope.temp_wine.photo;
+      $scope.temp_wine.photo = '';
+    }
+    
     var file = evt.currentTarget.files[0];
     var reader = new FileReader();
     reader.onload = function (evt) {
@@ -98,7 +103,9 @@ function( $scope, $stateParams, $location, $meteor ) {
 
 
   $scope.getImageUrl = function(photoId) {
-    return Images.findOne(photoId).url();
+    if (photoId) {
+      return Images.findOne(photoId).url();
+    }
   }
 
 	/**
@@ -140,10 +147,12 @@ function( $scope, $stateParams, $location, $meteor ) {
 			
 		} else if( $scope.editing_wine ) {
 			$scope.temp_wine.updated_at = Date.now();
+
       if ($scope.winePhotoImageCropped) {
         $scope.images.save($scope.winePhotoImageCropped).then(function(result) {
           $scope.temp_wine.photo = result[0]._id._id;
-          $meteor.call( 'updateWine', $scope.temp_wine);
+          $meteor.call( 'updateWine', $scope.temp_wine, $scope.oldImageId);
+          $scope.oldImageId = null;
         });
       } else {
         $meteor.call( 'updateWine', $scope.temp_wine );
