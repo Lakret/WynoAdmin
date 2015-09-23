@@ -7,7 +7,6 @@ function( $scope, $rootScope, $stateParams, $meteor ) {
 	$scope.temp_winery = {};
 
 	$scope.$meteorSubscribe( 'images' ).then( function() { $scope.images =  $meteor.collectionFS(Images, false, Images) });
-  // console.log($scope.images);
 
 	$scope.$meteorSubscribe( 'wineries' ).then( function() {
 	    $scope.temp_winery = Wineries.findOne( $stateParams.winery_id );
