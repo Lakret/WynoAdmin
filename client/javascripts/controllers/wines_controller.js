@@ -108,6 +108,12 @@ function( $scope, $stateParams, $location, $meteor ) {
     }
   }
 
+  $scope.getImageUrlOriginal = function(photoId) {
+    if (photoId) {
+      return Images.findOne(photoId).url({store: 'original'});
+    }
+  }
+
 	/**
 	 * Adds an empty item to the goes well with module. This will 
 	 * be saved whenever the user presses save in the popup.
