@@ -104,7 +104,7 @@ function( $scope, $stateParams, $location, $meteor ) {
 
   $scope.getImageUrl = function(photoId) {
     if (photoId) {
-      return Images.findOne(photoId).url();
+      return Images.findOne(photoId).url({store: 'thumbnail'});
     }
   }
 
