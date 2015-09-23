@@ -5,9 +5,15 @@ angular.module( 'WynoAdmin' ).controller( 'WinerySettingsController', [
 '$meteor',
 function( $scope, $rootScope, $stateParams, $meteor ) {
 	$scope.temp_winery = {};
-	$scope.images = $meteor.collectionFS(Images, false, Images);
+
 	$scope.$meteorSubscribe( 'wineries' ).then( function() {
 	    $scope.temp_winery = Wineries.findOne( $stateParams.winery_id );
+      if ($scope.temp_winery.logo_src) {
+        $scope.$meteorSubscribe('images').then(function() {
+            $scope.image = Images.findOne($scope.temp_winery.logo_src);
+          }
+        )
+      }
 	});
 
 	$scope.createWinery = function() {
@@ -19,13 +25,19 @@ function( $scope, $rootScope, $stateParams, $meteor ) {
 	$scope.updateWinery = function() {
 		debugger;
 		$scope.temp_winery.updated_at = Date.now();
-		$meteor.call( 'updateWinery', $scope.temp_winery );
+    if ($scope.oldImageId) {
+      $meteor.call( 'updateWinery', $scope.temp_winery, $scope.oldImageId );
+    } else {
+      $meteor.call( 'updateWinery', $scope.temp_winery );
+    }
 		$rootScope.goHome();
 	}
 
     $scope.uploadFile = function (files) {
       	if (files.length > 0) {
         	$scope.images.save( files[ 0 ] ).then( function( result ) {
+            $scope.oldImageId = $scope.temp_winery.logo_src;
+
         		$scope.temp_winery.logo_src = result[ 0 ]._id._id;
         	});
       	}

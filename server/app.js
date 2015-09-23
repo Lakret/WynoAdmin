@@ -86,11 +86,14 @@ Meteor.methods({
         }
         Wineries.insert( winery );
     },
-    updateWinery: function( winery ) {
+    updateWinery: function( winery, oldImageId ) {
         if ( !Meteor.userId() ) {
           throw new Meteor.Error('not-authorized');
         }
         Wineries.update( winery._id, winery );
+        if (oldImageId) {
+          Images.remove(oldImageId);
+        }
     },
 
     /**
