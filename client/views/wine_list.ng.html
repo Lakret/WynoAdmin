@@ -17,7 +17,8 @@
 		</div>
 		<div id="wines">
 			<div class="a-wine" ng-repeat="wine in wines">
-				<img src="/images/icon_120px.svg" />
+				<!-- <img src="/images/icon_120px.svg" /> -->
+				<img src="{{getImageUrl(wine.photo)}}" />
 				<div class="primary-info">
 					<h1>{{ wine.name }}</h1>
 					<h2>{{ wine.location }}</h2>
@@ -39,8 +40,11 @@
 			<button class="save-cancel-buttons" id="cancel-button" ng-click="hideWinePopup()">cancel</button>
 			<div id="popup-content">
 				<div id="left-half">
-					<img id="wine-photo" ng-src="/images/{{ temp_wine.photo }}" />
-					<button id="change-photo">change photo</button>
+					<!-- <img id="wine-photo" ng-src="/images/{{ temp_wine.photo }}" /> -->
+					<div class="cropArea">
+				    <img-crop id="wine-photo" image="winePhotoImage" result-image="winePhotoImageCropped" change-on-fly="true" area-type="square" result-image-size="180"></img-crop>
+				  </div>
+					<button id="change-photo" ng-click="triggerImageUpload()">change photo <input type="file" id="winePhotoImageInput" style="display:none;"/></button>
 				</div>
 				<div id="right-half">
 					<div id="wine-title" class="input-container">

@@ -18,6 +18,7 @@ function( $scope, $stateParams, $location, $meteor ) {
 		    return Wines.find( { winery_id: $stateParams.winery_id }, { sort: { created_at: 1 } } )
 		});
 	});
+  $scope.$meteorSubscribe( 'images' ).then( function() { $scope.images =  $meteor.collectionFS(Images, false, Images) });
 	$scope.adding_wine = false;
 	$scope.editing_wine = false;
 	$scope.temp_wine = {};
@@ -75,6 +76,31 @@ function( $scope, $stateParams, $location, $meteor ) {
 		return;
 	}
 
+  // image cropping in popup
+  $scope.winePhotoImage = '';
+  $scope.winePhotoImageCropped = '';
+
+  var handleFileSelect = function(evt) {
+    var file = evt.currentTarget.files[0];
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+      $scope.$apply(function($scope) {
+        $scope.winePhotoImage = evt.target.result;
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+  angular.element(document.querySelector('#winePhotoImageInput')).on('change', handleFileSelect);
+
+  $scope.triggerImageUpload = function() {
+    document.querySelector('#winePhotoImageInput').click();
+  }
+
+
+  $scope.getImageUrl = function(photoId) {
+    return Images.findOne(photoId).url();
+  }
+
 	/**
 	 * Adds an empty item to the goes well with module. This will 
 	 * be saved whenever the user presses save in the popup.
@@ -102,11 +128,29 @@ function( $scope, $stateParams, $location, $meteor ) {
 	$scope.saveWine = function() {
 		if( $scope.adding_wine ) {
 			$scope.temp_wine.created_at = Date.now();
-			$meteor.call( 'createWine', $scope.temp_wine );
+
+      if ($scope.winePhotoImageCropped) {
+        $scope.images.save($scope.winePhotoImageCropped).then(function(result) {
+          $scope.temp_wine.photo = result[0]._id._id;
+          $meteor.call( 'createWine', $scope.temp_wine);
+        });
+      } else {
+        $meteor.call( 'createWine', $scope.temp_wine );
+      }
+			
 		} else if( $scope.editing_wine ) {
 			$scope.temp_wine.updated_at = Date.now();
-			$meteor.call( 'updateWine', $scope.temp_wine );
+      if ($scope.winePhotoImageCropped) {
+        $scope.images.save($scope.winePhotoImageCropped).then(function(result) {
+          $scope.temp_wine.photo = result[0]._id._id;
+          $meteor.call( 'updateWine', $scope.temp_wine);
+        });
+      } else {
+        $meteor.call( 'updateWine', $scope.temp_wine );
+      }
 		}
+    $scope.winePhotoImage = '';
+    $scope.winePhotoImageCropped = '';
 		$scope.hideWinePopup();
 	}
 

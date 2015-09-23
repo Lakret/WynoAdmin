@@ -6,6 +6,9 @@ angular.module( 'WynoAdmin' ).controller( 'WinerySettingsController', [
 function( $scope, $rootScope, $stateParams, $meteor ) {
 	$scope.temp_winery = {};
 
+	$scope.$meteorSubscribe( 'images' ).then( function() { $scope.images =  $meteor.collectionFS(Images, false, Images) });
+  // console.log($scope.images);
+
 	$scope.$meteorSubscribe( 'wineries' ).then( function() {
 	    $scope.temp_winery = Wineries.findOne( $stateParams.winery_id );
       if ($scope.temp_winery.logo_src) {
@@ -23,7 +26,6 @@ function( $scope, $rootScope, $stateParams, $meteor ) {
 	}
 
 	$scope.updateWinery = function() {
-		debugger;
 		$scope.temp_winery.updated_at = Date.now();
     if ($scope.oldImageId) {
       $meteor.call( 'updateWinery', $scope.temp_winery, $scope.oldImageId );
@@ -33,13 +35,13 @@ function( $scope, $rootScope, $stateParams, $meteor ) {
 		$rootScope.goHome();
 	}
 
-    $scope.uploadFile = function (files) {
-      	if (files.length > 0) {
-        	$scope.images.save( files[ 0 ] ).then( function( result ) {
-            $scope.oldImageId = $scope.temp_winery.logo_src;
+  $scope.uploadFile = function (files) {
+    	if (files.length > 0) {
+      	$scope.images.save( files[ 0 ] ).then( function( result ) {
+          $scope.oldImageId = $scope.temp_winery.logo_src;
 
-        		$scope.temp_winery.logo_src = result[ 0 ]._id._id;
-        	});
-      	}
-    };
+      		$scope.temp_winery.logo_src = result[ 0 ]._id._id;
+      	});
+    	}
+  };
 }]);
