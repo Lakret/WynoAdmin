@@ -43,7 +43,7 @@
 					<!-- <img id="wine-photo" ng-src="/images/{{ temp_wine.photo }}" /> -->
 					<img ng-show="temp_wine.photo" id="wine-photo" ng-src="{{getImageUrlOriginal(temp_wine.photo)}}" />
 					<div ng-hide="temp_wine.photo" class="cropArea">
-				    <img-crop id="wine-photo" image="winePhotoImage" result-image="winePhotoImageCropped" change-on-fly="true" area-type="square" result-image-size="180"></img-crop>
+				    <img-crop id="wine-photo" image="winePhotoImage" result-image="winePhotoImageCropped" change-on-fly="true" area-type="square"></img-crop>
 				  </div>
 					<button id="change-photo" ng-click="triggerImageUpload()">change photo <input type="file" id="winePhotoImageInput" style="display:none;"/></button>
 				</div>
